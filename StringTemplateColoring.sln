@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringTemplateColoring", "src\StringTemplateColoring.csproj", "{C49C721D-A167-4017-9DE6-9FAA7D48C3AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C49C721D-A167-4017-9DE6-9FAA7D48C3AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C49C721D-A167-4017-9DE6-9FAA7D48C3AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C49C721D-A167-4017-9DE6-9FAA7D48C3AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C49C721D-A167-4017-9DE6-9FAA7D48C3AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {502503B0-9DCA-4E26-BB93-D7360A16218E}
+	EndGlobalSection
+EndGlobal
