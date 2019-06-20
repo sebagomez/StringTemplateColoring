@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 
-namespace sebagomez.StringTemplateColoring
+namespace StringTemplateColoring.Coloring
 {
 	internal class StringTemplateClassifier : IClassifier
 	{

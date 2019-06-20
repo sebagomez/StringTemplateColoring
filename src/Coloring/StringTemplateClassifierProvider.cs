@@ -2,8 +2,9 @@
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
+using StringTemplateColoring.Misc;
 
-namespace sebagomez.StringTemplateColoring
+namespace StringTemplateColoring.Coloring
 {
 	[Export(typeof(IClassifierProvider))]
 	[ContentType(StringHelper.STRING_TEMPLATE)]

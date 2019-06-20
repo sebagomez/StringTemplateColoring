@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using Microsoft.VisualStudio.PlatformUI;
 
-namespace sebagomez.StringTemplateColoring
+namespace StringTemplateColoring.Coloring
 {
 	internal class StringTemplateColors
 	{
@@ -85,6 +85,16 @@ namespace sebagomez.StringTemplateColoring
 			{ StringTemplateTokens.StringTemplateTokenHelper.STVariable, new Dictionary<Theme, Color>
 				{
 					{ Theme.ANY, Colors.Cyan }
+				}
+			},
+			{ StringTemplateTokens.StringTemplateTokenHelper.STTemplateCall, new Dictionary<Theme, Color>
+				{
+					{ Theme.ANY, Colors.Orange }
+				}
+			},
+			{ StringTemplateTokens.StringTemplateTokenHelper.STComment, new Dictionary<Theme, Color>
+				{
+					{ Theme.ANY, Colors.DarkGreen }
 				}
 			}
 		};

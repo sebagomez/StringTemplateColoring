@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
-namespace sebagomez.StringTemplateColoring
+namespace StringTemplateColoring.Coloring
 {
 	internal static class StringTemplateClassifierClassificationDefinition
 	{
@@ -25,5 +25,13 @@ namespace sebagomez.StringTemplateColoring
 		[Export(typeof(ClassificationTypeDefinition))]
 		[Name(StringTemplateTokens.StringTemplateTokenHelper.STVariable)]
 		private static ClassificationTypeDefinition variable;
+
+		[Export(typeof(ClassificationTypeDefinition))]
+		[Name(StringTemplateTokens.StringTemplateTokenHelper.STTemplateCall)]
+		private static ClassificationTypeDefinition tpCall;
+
+		[Export(typeof(ClassificationTypeDefinition))]
+		[Name(StringTemplateTokens.StringTemplateTokenHelper.STComment)]
+		private static ClassificationTypeDefinition comment;
 	}
 }

@@ -8,7 +8,7 @@ using System.Windows.Media;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Utilities;
 
-namespace sebagomez.StringTemplateColoring
+namespace StringTemplateColoring.Coloring
 {
 	[Export(typeof(EditorFormatDefinition))]
 	[ClassificationType(ClassificationTypeNames = StringTemplateTokens.StringTemplateTokenHelper.STKeyword)]
@@ -79,6 +79,34 @@ namespace sebagomez.StringTemplateColoring
 		{
 			this.DisplayName = "This is a $variable$"; //human readable version of the name
 			this.ForegroundColor = StringTemplateColors.GetTokenColor(StringTemplateTokens.StringTemplateTokenHelper.STVariable);
+		}
+	}
+
+	[Export(typeof(EditorFormatDefinition))]
+	[ClassificationType(ClassificationTypeNames = StringTemplateTokens.StringTemplateTokenHelper.STTemplateCall)]
+	[Name("TemplateCallFormat")]
+	[UserVisible(false)]
+	[Order(Before = Priority.Default)]
+	internal sealed class TemplateCallFormat : ClassificationFormatDefinition
+	{
+		public TemplateCallFormat()
+		{
+			this.DisplayName = "This is a $template_call()$"; //human readable version of the name
+			this.ForegroundColor = StringTemplateColors.GetTokenColor(StringTemplateTokens.StringTemplateTokenHelper.STTemplateCall);
+		}
+	}
+
+	[Export(typeof(EditorFormatDefinition))]
+	[ClassificationType(ClassificationTypeNames = StringTemplateTokens.StringTemplateTokenHelper.STComment)]
+	[Name("CommentFormat")]
+	[UserVisible(false)]
+	[Order(Before = Priority.Default)]
+	internal sealed class CommentFormat : ClassificationFormatDefinition
+	{
+		public CommentFormat()
+		{
+			this.DisplayName = "This is a comment"; //human readable version of the name
+			this.ForegroundColor = StringTemplateColors.GetTokenColor(StringTemplateTokens.StringTemplateTokenHelper.STComment);
 		}
 	}
 }
