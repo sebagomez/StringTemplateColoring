@@ -62,7 +62,7 @@ namespace StringTemplateColoring.Coloring
 		{
 			{ StringTemplateTokens.StringTemplateTokenHelper.STTemplateFunction, new Dictionary<Theme, Color>
 				{
-					{ Theme.Dark, Colors.Plum },
+					{ Theme.Dark, Colors.LightSeaGreen },
 					{ Theme.ANY, Colors.Purple }
 				}
 			},
@@ -84,17 +84,23 @@ namespace StringTemplateColoring.Coloring
 			},
 			{ StringTemplateTokens.StringTemplateTokenHelper.STVariable, new Dictionary<Theme, Color>
 				{
-					{ Theme.ANY, Colors.Cyan }
+					{ Theme.ANY, Colors.Plum }
 				}
 			},
 			{ StringTemplateTokens.StringTemplateTokenHelper.STTemplateCall, new Dictionary<Theme, Color>
 				{
-					{ Theme.ANY, Colors.Orange }
+					{ Theme.ANY, Colors.NavajoWhite }
 				}
 			},
 			{ StringTemplateTokens.StringTemplateTokenHelper.STComment, new Dictionary<Theme, Color>
 				{
 					{ Theme.ANY, Colors.DarkGreen }
+				}
+			},
+			{ StringTemplateTokens.StringTemplateTokenHelper.STPlain, new Dictionary<Theme, Color>
+				{
+					{ Theme.Dark, Colors.Silver },
+					{ Theme.ANY, Colors.DimGray }
 				}
 			}
 		};

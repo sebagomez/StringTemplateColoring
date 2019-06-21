@@ -4,7 +4,7 @@
 	{
 		public enum StringTemplateTokenTypes
 		{
-			STKeyword, STTemplateFunction, STTemplateOpen, STTemplateOpen2, STVariable, STTemplateCall, STComment
+			STKeyword, STTemplateFunction, STTemplateOpen, STTemplateOpen2, STVariable, STTemplateCall, STComment, STPlain
 		}
 
 		public sealed class StringTemplateTokenHelper
@@ -16,6 +16,7 @@
 			public const string STVariable = "STVariable";
 			public const string STTemplateCall = "STTemplateCall";
 			public const string STComment = "STComment";
+			public const string STPlain = "STPlain";
 		}
 	}
 }

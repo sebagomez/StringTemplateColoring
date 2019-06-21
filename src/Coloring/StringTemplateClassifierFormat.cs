@@ -109,4 +109,18 @@ namespace StringTemplateColoring.Coloring
 			this.ForegroundColor = StringTemplateColors.GetTokenColor(StringTemplateTokens.StringTemplateTokenHelper.STComment);
 		}
 	}
+
+	[Export(typeof(EditorFormatDefinition))]
+	[ClassificationType(ClassificationTypeNames = StringTemplateTokens.StringTemplateTokenHelper.STPlain)]
+	[Name("PlainFormat")]
+	[UserVisible(false)]
+	[Order(Before = Priority.Default)]
+	internal sealed class PlainFormat : ClassificationFormatDefinition
+	{
+		public PlainFormat()
+		{
+			this.DisplayName = "This is plain text, not template code"; //human readable version of the name
+			this.ForegroundColor = StringTemplateColors.GetTokenColor(StringTemplateTokens.StringTemplateTokenHelper.STPlain);
+		}
+	}
 }

@@ -33,5 +33,9 @@ namespace StringTemplateColoring.Coloring
 		[Export(typeof(ClassificationTypeDefinition))]
 		[Name(StringTemplateTokens.StringTemplateTokenHelper.STComment)]
 		private static ClassificationTypeDefinition comment;
+
+		[Export(typeof(ClassificationTypeDefinition))]
+		[Name(StringTemplateTokens.StringTemplateTokenHelper.STPlain)]
+		private static ClassificationTypeDefinition plain;
 	}
 }
