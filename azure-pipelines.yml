@@ -29,5 +29,5 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    pathtoPublish: '$(build.SourcesDirectory)' 
+    pathtoPublish: '$(build.SourcesDirectory)\\bin\\$(buildConfiguration)\\StringTemplateColoring.vsix' 
     artifactName: 'vsix' 
