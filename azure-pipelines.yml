@@ -29,14 +29,14 @@ steps:
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
-    script: '$file = "$(build.SourcesDirectory)\\bin\\$(buildConfiguration)\\StringTemplateColoring.dll"
+    script: '$file = "$(build.SourcesDirectory)\\src\\bin\\$(buildConfiguration)\\StringTemplateColoring.dll"
 
 $version = $(Get-Item $file).VersionInfo.ProductVersion
 
 Write-Host $version
 
-Set-Content "$(build.SourcesDirectory)\\bin\\$(buildConfiguration)\\version.txt" "StringTemplateColoring v$($version)"'
+Set-Content "$(build.SourcesDirectory)\\src\\bin\\$(buildConfiguration)\\version.txt" "StringTemplateColoring v$($version)"'
 - task: PublishBuildArtifacts@1
   inputs:
-    pathtoPublish: '$(build.SourcesDirectory)\\bin\\$(buildConfiguration)\\StringTemplateColoring.vsix' 
+    pathtoPublish: '$(build.SourcesDirectory)\\src\\bin\\$(buildConfiguration)\\StringTemplateColoring.vsix' 
     artifactName: 'vsix' 
