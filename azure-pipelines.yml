@@ -27,4 +27,7 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(build.SourcesDirectory)' 
+    artifactName: 'vsix' 
