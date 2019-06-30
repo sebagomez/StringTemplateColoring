@@ -38,5 +38,5 @@ Write-Host $version
 Set-Content "$(build.SourcesDirectory)\\src\\bin\\$(buildConfiguration)\\version.txt" "StringTemplateColoring v2019.1.$($version)"'
 - task: PublishBuildArtifacts@1
   inputs:
-    pathtoPublish: '$(build.SourcesDirectory)\\src\\bin\\$(buildConfiguration)\\StringTemplateColoring.vsix' 
+    pathtoPublish: '$(build.SourcesDirectory)\\src\\bin\\$(buildConfiguration)' 
     artifactName: 'vsix' 
