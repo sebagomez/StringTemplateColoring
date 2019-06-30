@@ -35,7 +35,7 @@ $version = $(Get-Item $file).VersionInfo.ProductVersion
 
 Write-Host $version
 
-Set-Content "$(build.SourcesDirectory)\\src\\bin\\$(buildConfiguration)\\version.txt" "StringTemplateColoring v$($version)"'
+Set-Content "$(build.SourcesDirectory)\\src\\bin\\$(buildConfiguration)\\version.txt" "StringTemplateColoring v2019.1.$($version)"'
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: '$(build.SourcesDirectory)\\src\\bin\\$(buildConfiguration)\\StringTemplateColoring.vsix' 

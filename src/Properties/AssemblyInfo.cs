@@ -6,13 +6,12 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("StringTemplateColoring")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Syntax coloring for StringTempplate.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("@sebagomez")]
 [assembly: AssemblyProduct("StringTemplateColoring")]
-[assembly: AssemblyCopyright("")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+[assembly: AssemblyCopyright("@sebagomez 2019")]
+[assembly: AssemblyTrademark("@sebagomez 2019")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -30,4 +29,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 //[assembly: AssemblyVersion("1.0.0.*")]
-[assembly: AssemblyFileVersion("0.5.0")]
+[assembly: AssemblyFileVersion("0.5")]
