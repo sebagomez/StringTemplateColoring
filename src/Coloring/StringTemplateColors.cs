@@ -68,8 +68,8 @@ namespace StringTemplateColoring.Coloring
 			},
 			{ StringTemplateTokens.StringTemplateTokenHelper.STKeyword, new Dictionary<Theme, Color>
 				{
-					{ Theme.Dark, Colors.Orange },
-					{ Theme.ANY, Colors.DarkOrange }
+					{ Theme.Dark, Colors.DodgerBlue },
+					{ Theme.ANY, Colors.Blue }
 				}
 			},
 			{ StringTemplateTokens.StringTemplateTokenHelper.STTemplateOpen, new Dictionary<Theme, Color>

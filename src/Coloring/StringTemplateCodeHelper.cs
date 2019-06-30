@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 
@@ -13,18 +10,15 @@ namespace StringTemplateColoring.Coloring
 	{
 		//https://medium.com/factory-mind/regex-tutorial-a-simple-cheatsheet-by-examples-649dc1c3f285
 		const string HEADER_REG = @"(\w*\()(.*)(\)::=)";
-		const string SUB_TPL_OPEN = @"\u003C\u003C"; //<<
-		const string SUB_TPL_CLOSE = @"\u003E\u003E"; //>>
-		const string SUB_TPL_OPEN2 = @"\u003C\u0025"; //<%
-		const string SUB_TPL_CLOSE2 = @"\u0025\u003E"; //%>
-		const string VARIABLE_REG = @"\$[^\$:]*\$"; //$template$
+		const string SUB_TPL_MULTILINE = @".*(\u003C\u003C|\u003E\u003E).*"; //<< | >>
+		const string SUB_TPL_IGNORE_NL = @".*(\u003C\u0025).*(\u0025\u003E).*"; //<% | %>
+		const string TEMPLATE_REG = @"\$[^\$:]*\$"; //$template$
 		const string ITERATOR_REG = @"(\$.*)(\:\{)+(.*)\|(.*)(\};)(.*\$)"; // 
 		const string COMMENT_REG = @"\$!(.*)!\$"; // comment
-		const string KEYWORD_REG = @"(group|delimiters|first|last|rest|trunc|strip|length|default|implements|optional|interface|super)";
-		const string IF_STATMENT_REG = @"\$.*(if).*\(.*\).*\$";
-		const string ELSEIF_STATMENT_REG = @"\$.*(elseif).*\(.*\).*\$";
-		const string ENDIF_STATMENT_REG = @"\$.*(endif).*\$";
-		const string ELSE_STATMENT_REG = @"\$.*(else).*\$";
+		const string KEYWORD_REG = @"\b(group|delimiters|first|last|rest|trunc|strip|length|default|implements|optional|interface|super)\b";
+		const string STATMENT_REG = @"\b(if|else|elseif|endif)\b";
+
+		static readonly string[] FLOW_STATEMENT = new string[] { "if", "else", "elseif", "endif" };
 
 		static object lockObject = new object();
 
@@ -41,7 +35,7 @@ namespace StringTemplateColoring.Coloring
 				{
 					SnapshotSpan span = line.Extent;
 
-					int curLoc = line.Start.Position;
+					//int curLoc = line.Start.Position;
 					string formattedLine = line.GetText();
 
 					Regex reg = new Regex(".*");
@@ -70,33 +64,28 @@ namespace StringTemplateColoring.Coloring
 						}
 					}
 
-					reg = new Regex(SUB_TPL_OPEN);
+					reg = new Regex(SUB_TPL_MULTILINE);
 					foreach (Match match in reg.Matches(formattedLine))
 					{
-						result.Add(new ClassificationSpan(new SnapshotSpan(new SnapshotPoint(span.Snapshot, match.Index + curLoc), match.Length), registry.GetClassificationType(StringTemplateTokens.StringTemplateTokenHelper.STTemplateOpen)));
+						AddGroupClassificationType(result, span, match, registry.GetClassificationType(StringTemplateTokens.StringTemplateTokenHelper.STTemplateOpen));
+						//AddClassificatioType(result, span, match.Index, match.Length, registry.GetClassificationType(StringTemplateTokens.StringTemplateTokenHelper.STTemplateOpen));
 					}
 
-					reg = new Regex(SUB_TPL_CLOSE);
+					reg = new Regex(SUB_TPL_IGNORE_NL);
 					foreach (Match match in reg.Matches(formattedLine))
 					{
-						result.Add(new ClassificationSpan(new SnapshotSpan(new SnapshotPoint(span.Snapshot, match.Index + curLoc), match.Length), registry.GetClassificationType(StringTemplateTokens.StringTemplateTokenHelper.STTemplateOpen)));
+						AddGroupClassificationType(result, span, match, registry.GetClassificationType(StringTemplateTokens.StringTemplateTokenHelper.STTemplateOpen2));
+						//AddClassificatioType(result, span, match.Index, match.Length, registry.GetClassificationType(StringTemplateTokens.StringTemplateTokenHelper.STTemplateOpen2));
 					}
 
-					reg = new Regex(SUB_TPL_OPEN2);
+					reg = new Regex(TEMPLATE_REG);
 					foreach (Match match in reg.Matches(formattedLine))
 					{
-						result.Add(new ClassificationSpan(new SnapshotSpan(new SnapshotPoint(span.Snapshot, match.Index + curLoc), match.Length), registry.GetClassificationType(StringTemplateTokens.StringTemplateTokenHelper.STTemplateOpen2)));
-					}
-
-					reg = new Regex(SUB_TPL_CLOSE2);
-					foreach (Match match in reg.Matches(formattedLine))
-					{
-						result.Add(new ClassificationSpan(new SnapshotSpan(new SnapshotPoint(span.Snapshot, match.Index + curLoc), match.Length), registry.GetClassificationType(StringTemplateTokens.StringTemplateTokenHelper.STTemplateOpen2)));
-					}
-
-					reg = new Regex(VARIABLE_REG);
-					foreach (Match match in reg.Matches(formattedLine))
-					{
+						reg = new Regex(STATMENT_REG);
+						foreach (Match match1 in reg.Matches(match.Value))
+						{
+							AddGroupClassificationType(result, span, match1, registry.GetClassificationType(StringTemplateTokens.StringTemplateTokenHelper.STKeyword));
+						}
 						AddClassificatioType(result, span, match.Index, match.Length, registry.GetClassificationType(StringTemplateTokens.StringTemplateTokenHelper.STVariable));
 					}
 
@@ -129,93 +118,12 @@ namespace StringTemplateColoring.Coloring
 									break;
 							}
 						}
-
 					}
 
 					reg = new Regex(KEYWORD_REG);
 					foreach (Match match in reg.Matches(formattedLine))
 					{
-						for (int i = 0; i < match.Groups.Count; i++)
-						{
-							Group g = match.Groups[i];
-							switch (i)
-							{
-								case 0:
-									break;
-								default:
-									AddClassificatioType(result, span, g.Index, g.Length, registry.GetClassificationType(StringTemplateTokens.StringTemplateTokenHelper.STKeyword));
-									break;
-							}
-						}
-
-					}
-
-					reg = new Regex(IF_STATMENT_REG);
-					foreach (Match match in reg.Matches(formattedLine))
-					{
-						for (int i = 0; i < match.Groups.Count; i++)
-						{
-							Group g = match.Groups[i];
-							switch (i)
-							{
-								case 0:
-									break;
-								default:
-									AddClassificatioType(result, span, g.Index, g.Length, registry.GetClassificationType(StringTemplateTokens.StringTemplateTokenHelper.STKeyword));
-									break;
-							}
-						}
-					}
-
-					reg = new Regex(ELSE_STATMENT_REG);
-					foreach (Match match in reg.Matches(formattedLine))
-					{
-						for (int i = 0; i < match.Groups.Count; i++)
-						{
-							Group g = match.Groups[i];
-							switch (i)
-							{
-								case 0:
-									break;
-								default:
-									AddClassificatioType(result, span, g.Index, g.Length, registry.GetClassificationType(StringTemplateTokens.StringTemplateTokenHelper.STKeyword));
-									break;
-							}
-						}
-					}
-
-					reg = new Regex(ELSEIF_STATMENT_REG);
-					foreach (Match match in reg.Matches(formattedLine))
-					{
-						for (int i = 0; i < match.Groups.Count; i++)
-						{
-							Group g = match.Groups[i];
-							switch (i)
-							{
-								case 0:
-									break;
-								default:
-									AddClassificatioType(result, span, g.Index, g.Length, registry.GetClassificationType(StringTemplateTokens.StringTemplateTokenHelper.STKeyword));
-									break;
-							}
-						}
-					}
-
-					reg = new Regex(ENDIF_STATMENT_REG);
-					foreach (Match match in reg.Matches(formattedLine))
-					{
-						for (int i = 0; i < match.Groups.Count; i++)
-						{
-							Group g = match.Groups[i];
-							switch (i)
-							{
-								case 0:
-									break;
-								default:
-									AddClassificatioType(result, span, g.Index, g.Length, registry.GetClassificationType(StringTemplateTokens.StringTemplateTokenHelper.STKeyword));
-									break;
-							}
-						}
+						AddGroupClassificationType(result, span, match, registry.GetClassificationType(StringTemplateTokens.StringTemplateTokenHelper.STKeyword));
 					}
 
 					reg = new Regex(COMMENT_REG);
@@ -228,6 +136,22 @@ namespace StringTemplateColoring.Coloring
 				return result;
 			}
 
+		}
+
+		private static void AddGroupClassificationType(List<ClassificationSpan> result, SnapshotSpan span, Match match, IClassificationType classificationType)
+		{
+			for (int i = 0; i < match.Groups.Count; i++)
+			{
+				Group g = match.Groups[i];
+				switch (i)
+				{
+					case 0:
+						break;
+					default:
+						AddClassificatioType(result, span, g.Index, g.Length, classificationType);
+						break;
+				}
+			}
 		}
 
 		static void AddClassificatioType(List<ClassificationSpan> result, SnapshotSpan span, int start, int length, IClassificationType classificationType)

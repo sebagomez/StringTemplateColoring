@@ -6,6 +6,8 @@ namespace StringTemplateColoring.Coloring
 {
 	internal static class StringTemplateClassifierClassificationDefinition
 	{
+#pragma warning disable 0169
+
 		[Export(typeof(ClassificationTypeDefinition))]
 		[Name(StringTemplateTokens.StringTemplateTokenHelper.STKeyword)]
 		private static ClassificationTypeDefinition keyword;
@@ -37,5 +39,6 @@ namespace StringTemplateColoring.Coloring
 		[Export(typeof(ClassificationTypeDefinition))]
 		[Name(StringTemplateTokens.StringTemplateTokenHelper.STPlain)]
 		private static ClassificationTypeDefinition plain;
+#pragma warning restore 0169
 	}
 }

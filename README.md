@@ -7,4 +7,4 @@ This [StringTemplate cheat sheet](https://theantlrguy.atlassian.net/wiki/spaces/
 
 So far, it looks like this 👇  
 
-![](res/preview.png)
+![](src/Resources/preview.png)

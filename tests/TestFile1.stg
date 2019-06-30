@@ -1,0 +1,18 @@
+
+header()::=<<
+
+if not colorized this is a comment 
+
+$item.Name$
+
+$template()$
+
+$template(item.Name)$
+
+$if(item.Name)$
+esto en el if
+$else$
+esto en el else
+$endif$
+
+>>
