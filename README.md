@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/sebagomez/StringTemplateColoring/_apis/build/status/Build%20StringTemplateColoring?branchName=master)](https://dev.azure.com/sebagomez/StringTemplateColoring/_build/latest?definitionId=13&branchName=master)
+
 # StringTemplateColoring
 Visual Studio 2019 extension that provides syntax coloring for StringTemplate 4
 
